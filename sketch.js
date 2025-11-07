@@ -40,7 +40,10 @@ class BadbadtzSarah {
     this.mouth = 0;
     this.jump = 0;
     this.jumpSpeed = 0;
-
+    this.dance = random(0.5,1);
+    this.move = random([-1,1]);
+    this.moveSpeed = random(0.2,0.5);
+    this.color = 0;
     // add properties for your dancer here:
     //..
     //..
@@ -50,25 +53,34 @@ class BadbadtzSarah {
     // update properties here to achieve
     // your dancer's desired moves and behaviour
     this.t += 0.05;
-    this.mouth = sin(this.t);
+    this.mouth = sin(this.t)*6;
     this.jump += this.jumpSpeed;
-    this.jumpSpeed += 0.5;
+    this.jumpSpeed += random(0.5,2);
     if (this.jump > 0) {
       this.jump = 0;
       this.jumpSpeed = random(-8, -5);
     }
-    
-
+    this.x += this.moveSpeed * this.move;
+    if (this.x > 200 || this.x < -200) {
+      this.move *= -1;
+    }
+    this.color += 0.005; 
+     if (this.color > 1) {
+      this.color = 0;
+    }
   }
   display() {
     // the push and pop, along with the translate 
     // places your whole dancer object at this.x and this.y.
     // you may change its position on line 19 to see the effect.
-    
+    let bodyR = lerp(20, 50, this.color);
+    let bodyG = lerp(20, 60, this.color);
+    let bodyB = lerp(30, 160, this.color);
+
     push();//身体
     translate(this.x, this.y+this.jump);
     rotate(sin(this.t)*0.1);
-    fill(80);
+    fill(bodyR, bodyG, bodyB);
     ellipse(0,40,80,90);
     fill(250);
     noStroke();
@@ -78,7 +90,7 @@ class BadbadtzSarah {
     push();//头
     translate(this.x, this.y+this.jump);
     noStroke();
-    fill(80);
+    fill(bodyR, bodyG, bodyB);
     ellipse(0,-20,70,60);
     
     fill(255);
@@ -101,17 +113,17 @@ class BadbadtzSarah {
     
     push();//左翅膀
     translate(this.x-35, this.y+10+this.jump);
-    rotate(sin(this.t)*0.5);
+    rotate(sin(this.t)*this.dance);
     noStroke();
-    fill(100);
+    fill(bodyR, bodyG, bodyB);
     ellipse(0,30,30,50);
     pop();
   
     push();//右翅膀
     translate(this.x+30, this.y+10+this.jump);
-    rotate(-sin(this.t)*0.5);
+    rotate(-sin(this.t)*this.dance);
     noStroke();
-    fill(100);
+    fill(bodyR, bodyG, bodyB);
     ellipse(0,30,30,50);
     pop();
   
