@@ -141,23 +141,12 @@ class BadbadtzSarah {
     // it is using "this" because this function, too, 
     // is a part if your Dancer object.
     // comment it out or delete it eventually.
-    this.drawReferenceShapes()
 
     pop();
   }
 
   
-  drawReferenceShapes() {
-    translate(this.x, this.y);
-    noFill();
-    stroke(255, 0, 0);
-    line(-5, 0, 5, 0);
-    line(0, -5, 0, 5);
-    stroke(100);
-    rect(-100, -100, 200,200 );
-    fill(255);
-    stroke(0);
-  }
+  
 }
 
 
